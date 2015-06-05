@@ -15,6 +15,17 @@
 
 @implementation ViewController
 
+- (instancetype) init {
+    self = [super init];
+    
+    if (self) {
+        self.title = NSLocalizedString(@"Wine", @"wine");
+        [self.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -18)];
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     // Calls the superclass's implementation
@@ -48,8 +59,7 @@
     
     // Gets rid of the maximum number of lines on the label
     self.resultLabel.numberOfLines = 0;
-    
-    self.title = NSLocalizedString(@"Wine", @"wine");
+    self.view.backgroundColor = [UIColor colorWithRed:0.741 green:0.925 blue:0.714 alpha:1]; /*#bdecb6*/
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,6 +78,7 @@
 - (void)sliderValueDidChange:(UISlider *)sender {
     NSLog(@"Slider value changed to %f", sender.value);
     [self.beerPercentTextField resignFirstResponder];
+    [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", (int) sender.value]];
 }
 
 - (void)buttonPressed:(UIButton *)sender {
@@ -97,7 +108,6 @@
         }
     NSString *resultText = [NSString stringWithFormat:NSLocalizedString(@"%d %@ contains as much alcohol as %.1f %@ of wine.", nil), numberOfBeers, beerText, numberOfWineGlassesForEquivalentAlcoholAmount, wineText];
     self.resultLabel.text = resultText;
-    self.title = [NSString stringWithFormat:@"Wine (%.1f %@)", numberOfWineGlassesForEquivalentAlcoholAmount, wineText];
 }
 
 - (void)tapGestureDidFire:(UITapGestureRecognizer *)sender {
