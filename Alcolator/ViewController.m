@@ -40,6 +40,9 @@
     // Set the placeholder text
     self.beerPercentTextField.placeholder = NSLocalizedString(@"% Alcohol Content Per Beer", @"Beer percent placeholder text");
     
+    // Set the text field background color to white
+    self.beerPercentTextField.backgroundColor = [UIColor whiteColor];
+    
     // Tells `self.beerCountSlider` that when its value changes, it should call `[self -sliderValueDidChange:]`.
     // This is equivalent to connecting the IBAction in our previous checkpoint
     [self.beerCountSlider addTarget:self action:@selector(sliderValueDidChange:) forControlEvents:UIControlEventValueChanged];
@@ -143,19 +146,27 @@
 - (void) viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    CGFloat viewWidth = 320;
+/*  CGFloat viewWidth = 320;
     CGFloat itemHeight = 44;
     CGFloat padding = 20;
-    CGFloat itemWidth = viewWidth - padding - padding;
-
-
-    self.beerPercentTextField.frame = CGRectMake(padding, 4*padding, itemWidth, itemHeight);
+    CGFloat itemWidth = viewWidth - padding - padding; */
+    
+/*  CGFloat itemHeight = 44; */
+/*  CGFloat padding = 20; */
+    CGFloat padding = CGRectGetHeight(self.view.bounds)/15;
+    CGFloat itemHeight = 2*padding;
+    CGFloat itemWidth = CGRectGetWidth(self.view.bounds) - padding - padding;
+    
+    self.beerPercentTextField.frame = CGRectMake(padding, padding, itemWidth, itemHeight);
     
     CGFloat bottomOfTextField = CGRectGetMaxY(self.beerPercentTextField.frame);
     self.beerCountSlider.frame = CGRectMake(padding, bottomOfTextField + padding, itemWidth, itemHeight);
     
+/*  CGFloat bottomOfSlider = CGRectGetMaxY(self.beerCountSlider.frame);
+    self.resultLabel.frame = CGRectMake(padding, bottomOfSlider + padding, itemWidth, itemHeight * 4); */
+    
     CGFloat bottomOfSlider = CGRectGetMaxY(self.beerCountSlider.frame);
-    self.resultLabel.frame = CGRectMake(padding, bottomOfSlider + padding, itemWidth, itemHeight * 4);
+    self.resultLabel.frame = CGRectMake(padding, bottomOfSlider + padding, itemWidth, itemHeight);
     
     CGFloat bottomOfLabel = CGRectGetMaxY(self.resultLabel.frame);
     self.calculateButton.frame = CGRectMake(padding, bottomOfLabel + padding, itemWidth, itemHeight);
